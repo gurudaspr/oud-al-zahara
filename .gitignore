@@ -39,3 +39,31 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS / editor
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.vscode/
+.idea/
+*.suo
+*.user
+*.swp
+*.swo
+*~
+
+# logs
+logs/
+*.log
+
+# turbopack cache
+.turbo/
+
+# next.js telemetry
+.next/cache/
+
+# package manager locks (keep only one — uncomment the one you don't use)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
