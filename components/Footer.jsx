@@ -2,6 +2,11 @@
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 
+// REPLACE WITH CLIENT SOCIAL LINKS
+const WA_NUMBER = "91XXXXXXXXXX";
+const INSTAGRAM = "https://instagram.com/oudalzahara";
+const FACEBOOK = "https://facebook.com/oudalzahara";
+
 function IgIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -20,114 +25,136 @@ function FbIcon({ size = 18 }) {
   );
 }
 
-// REPLACE WITH CLIENT SOCIAL LINKS
 const socials = [
-  { icon: IgIcon, href: "https://instagram.com/oudalzahara", label: "Instagram" },
-  { icon: FbIcon, href: "https://facebook.com/oudalzahara", label: "Facebook" },
-  { icon: MessageCircle, href: "https://wa.me/91XXXXXXXXXX", label: "WhatsApp" },
+  { icon: IgIcon, href: INSTAGRAM, label: "Instagram" },
+  { icon: FbIcon, href: FACEBOOK, label: "Facebook" },
+  { icon: MessageCircle, href: `https://wa.me/${WA_NUMBER}`, label: "WhatsApp" },
 ];
 
 const navLinks = ["Home", "Collection", "About", "Contact"];
+const SECTION_MAP = { Home: "hero", Collection: "collection", About: "about", Contact: "contact" };
 
 export default function Footer() {
-  const handleNav = (label) => {
-    const map = { Home: "hero", Collection: "collection", About: "about", Contact: "contact" };
-    document.getElementById(map[label])?.scrollIntoView({ behavior: "smooth" });
-  };
+  const year = new Date().getFullYear();
+
+  const scrollTo = (label) =>
+    document.getElementById(SECTION_MAP[label])?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <footer
-      className="pt-14 pb-8 px-6"
-      style={{
-        background: "#0d0d0d",
-        borderTop: "1px solid rgba(232,201,109,0.1)",
-      }}
+      className="pt-16 pb-8 px-6"
+      style={{ background: "#0d0d0d", borderTop: "1px solid rgba(232,201,109,0.1)" }}
     >
-      <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
-        {/* Logo */}
-        <div className="flex items-center gap-3 mb-6">
-          <Image src="/logo.png" alt="Oud Al Zahara" width={48} height={48} className="rounded-full" />
-          <span
-            className="text-xl font-bold tracking-widest"
-            style={{ fontFamily: "var(--font-playfair)", color: "#e8c96d" }}
-          >
-            Oud Al Zahara
-          </span>
-        </div>
+      <div className="max-w-6xl mx-auto">
 
-        {/* Tagline */}
-        <p
-          className="text-sm mb-8 tracking-widest uppercase"
-          style={{ color: "#888888", fontFamily: "var(--font-inter)" }}
-        >
-          The Essence of Arabia
-        </p>
+        {/* Top row */}
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 mb-12">
 
-        {/* Social icons */}
-        <div className="flex gap-5 mb-8">
-          {socials.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="p-3 rounded-full transition-all duration-300"
-              style={{
-                background: "rgba(232,201,109,0.08)",
-                color: "#888888",
-                border: "1px solid rgba(232,201,109,0.1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(232,201,109,0.18)";
-                e.currentTarget.style.color = "#e8c96d";
-                e.currentTarget.style.borderColor = "rgba(232,201,109,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(232,201,109,0.08)";
-                e.currentTarget.style.color = "#888888";
-                e.currentTarget.style.borderColor = "rgba(232,201,109,0.1)";
-              }}
+          {/* Brand */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex items-center gap-3 mb-3">
+              <Image src="/logo.png" alt="Oud Al Zahara" width={44} height={44} className="rounded-full" />
+              <span
+                className="text-lg font-bold tracking-widest"
+                style={{ fontFamily: "var(--font-playfair)", color: "#e8c96d", letterSpacing: "0.15em" }}
+              >
+                Oud Al Zahara
+              </span>
+            </div>
+            <p
+              className="text-sm max-w-xs leading-relaxed"
+              style={{ color: "#666", fontFamily: "var(--font-inter)" }}
             >
-              <Icon size={18} />
-            </a>
-          ))}
-        </div>
+              Premium hand-crafted oud perfumes and attars, rooted in Arabian tradition.
+            </p>
+          </div>
 
-        {/* Nav links */}
-        <div className="flex flex-wrap justify-center gap-6 mb-8">
-          {navLinks.map((l) => (
-            <button
-              key={l}
-              onClick={() => handleNav(l)}
-              className="text-xs uppercase tracking-widest transition-colors duration-200"
-              style={{
-                color: "#888888",
-                fontFamily: "var(--font-inter)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "#e8c96d")}
-              onMouseLeave={(e) => (e.target.style.color = "#888888")}
+          {/* Nav */}
+          <div>
+            <p
+              className="text-xs uppercase tracking-widest mb-4 text-center md:text-left"
+              style={{ color: "#c9a84c", fontFamily: "var(--font-inter)" }}
             >
-              {l}
-            </button>
-          ))}
+              Navigate
+            </p>
+            <ul className="flex flex-col gap-3 items-center md:items-start">
+              {navLinks.map((l) => (
+                <li key={l}>
+                  <button
+                    onClick={() => scrollTo(l)}
+                    className="text-sm"
+                    style={{
+                      color: "#888",
+                      fontFamily: "var(--font-inter)",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#e8c96d")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#888")}
+                  >
+                    {l}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div className="flex flex-col items-center md:items-start">
+            <p
+              className="text-xs uppercase tracking-widest mb-4"
+              style={{ color: "#c9a84c", fontFamily: "var(--font-inter)" }}
+            >
+              Follow Us
+            </p>
+            <div className="flex gap-3">
+              {socials.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="p-3 rounded-full"
+                  style={{
+                    background: "rgba(232,201,109,0.07)",
+                    color: "#888",
+                    border: "1px solid rgba(232,201,109,0.1)",
+                    transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(232,201,109,0.15)";
+                    e.currentTarget.style.color = "#e8c96d";
+                    e.currentTarget.style.borderColor = "rgba(232,201,109,0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(232,201,109,0.07)";
+                    e.currentTarget.style.color = "#888";
+                    e.currentTarget.style.borderColor = "rgba(232,201,109,0.1)";
+                  }}
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Divider */}
-        <div
-          className="w-full max-w-xs h-px mb-6"
-          style={{ background: "rgba(232,201,109,0.1)" }}
-        />
+        <div className="h-px mb-6" style={{ background: "rgba(232,201,109,0.08)" }} />
 
-        <p
-          className="text-xs"
-          style={{ color: "#555555", fontFamily: "var(--font-inter)" }}
-        >
-          © 2025 Oud Al Zahara. All rights reserved.
-        </p>
+        {/* Bottom row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
+          <p className="text-xs" style={{ color: "#444", fontFamily: "var(--font-inter)" }}>
+            © {year} Oud Al Zahara. All rights reserved.
+          </p>
+          <p className="text-xs" style={{ color: "#444", fontFamily: "var(--font-inter)" }}>
+            Crafted with care · The Essence of Arabia
+          </p>
+        </div>
+
       </div>
     </footer>
   );

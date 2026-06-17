@@ -2,14 +2,16 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const fadeLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.85, ease: EASE } },
 };
 
 const fadeRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.85, ease: EASE } },
 };
 
 export default function About() {
@@ -25,7 +27,7 @@ export default function About() {
           variants={fadeLeft}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, amount: 0.1 }}
           className="relative rounded-2xl overflow-hidden"
           style={{ aspectRatio: "4/3" }}
         >
@@ -50,7 +52,7 @@ export default function About() {
           variants={fadeRight}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Small label */}
           <p
@@ -83,13 +85,41 @@ export default function About() {
           </p>
 
           <p
-            className="text-base leading-relaxed"
+            className="text-base leading-relaxed mb-8"
             style={{ color: "#888888", fontFamily: "var(--font-inter)" }}
           >
             Our master perfumers blend rare woods, precious resins, and
             centuries-old traditions into every bottle. We believe that true
             luxury is felt on the skin — not just seen on a shelf.
           </p>
+
+          {/* Stats row */}
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { value: "50+", label: "Fragrances" },
+              { value: "500+", label: "Happy Customers" },
+              { value: "100%", label: "Authentic Oud" },
+            ].map(({ value, label }) => (
+              <div
+                key={label}
+                className="rounded-xl p-4 text-center"
+                style={{ background: "rgba(232,201,109,0.06)", border: "1px solid rgba(232,201,109,0.1)" }}
+              >
+                <p
+                  className="text-2xl font-bold mb-1"
+                  style={{ fontFamily: "var(--font-playfair)", color: "#e8c96d" }}
+                >
+                  {value}
+                </p>
+                <p
+                  className="text-xs uppercase tracking-widest"
+                  style={{ color: "#888", fontFamily: "var(--font-inter)" }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

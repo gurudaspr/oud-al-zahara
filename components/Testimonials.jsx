@@ -17,14 +17,16 @@ const reviews = [
   },
 ];
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const card = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" } },
+  hidden: { opacity: 0.01, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
 function Stars() {
@@ -66,7 +68,7 @@ export default function Testimonials() {
           variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, amount: 0.05 }}
           className="grid md:grid-cols-3 gap-6"
         >
           {reviews.map(({ quote, author }) => (

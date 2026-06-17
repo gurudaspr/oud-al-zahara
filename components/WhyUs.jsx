@@ -9,17 +9,19 @@ const features = [
   { icon: Truck, title: "Fast Delivery", desc: "Swift, safe shipping with elegant packaging to your doorstep." },
 ];
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.07 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0.01, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.75, ease: EASE },
   },
 };
 
@@ -56,7 +58,7 @@ export default function WhyUs() {
           variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5"
         >
           {features.map(({ icon: Icon, title, desc }) => (

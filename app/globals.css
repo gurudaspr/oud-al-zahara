@@ -9,6 +9,12 @@
   --muted: #888888;
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -16,14 +22,32 @@ body {
 
 html {
   scroll-behavior: smooth;
-  /* Prevent iOS Safari bounce from showing white background */
   overscroll-behavior: none;
   background: #0a0a0a;
 }
 
-/* Fix 100dvh for older iOS — sets CSS var to real viewport height */
-:root {
-  --vh: 1vh;
+/* Text selection */
+::selection {
+  background: rgba(232, 201, 109, 0.2);
+  color: #e8c96d;
+}
+
+/* Focus ring — accessible, on-brand */
+:focus-visible {
+  outline: 2px solid rgba(232, 201, 109, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar (Chromium/WebKit) */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 201, 109, 0.25);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 201, 109, 0.45);
 }
 
 @keyframes goldPulse {
@@ -35,6 +59,38 @@ html {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
 }
+
+/* Hero CSS-only entrance animations — no JS required */
+@keyframes heroScaleIn {
+  from { opacity: 0; transform: scale(0.88) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes heroExpandX {
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes chevronBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(7px); }
+}
+
+.hero-scale-in  { animation: heroScaleIn  0.9s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-fade-up   { animation: heroFadeUp   0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-fade-in   { animation: heroFadeIn   0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-expand-x  { animation: heroExpandX  0.8s cubic-bezier(0.22,1,0.36,1) both; transform-origin: center; }
+.hero-chevron   { animation: chevronBounce 1.8s ease-in-out infinite; }
 
 .gold-pulse {
   animation: goldPulse 3s ease-in-out infinite;

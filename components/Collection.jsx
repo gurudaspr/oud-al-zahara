@@ -12,14 +12,16 @@ const BADGE_COLORS = {
   Limited:    { bg: "rgba(251,146,60,0.12)",  border: "rgba(251,146,60,0.45)",  text: "#fb923c" },
 };
 
+const EASE = [0.22, 1, 0.36, 1];
+
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.07 } },
 };
 
 const card = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0.01, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
 };
 
 export default function Collection() {
@@ -51,7 +53,7 @@ export default function Collection() {
           variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5"
         >
           {products.map((p) => {

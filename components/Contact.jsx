@@ -122,7 +122,7 @@ export default function Contact() {
             <ContactItem
               icon={MessageCircle}
               label="WhatsApp"
-              value="Chat with us on WhatsApp"
+              value="Chat with us · Usually replies in minutes"
               href={CLIENT_WA}
               color="#25d366"
             />

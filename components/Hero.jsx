@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 
@@ -11,9 +10,9 @@ export default function Hero() {
     <section
       id="hero"
       className="relative flex items-center justify-center overflow-hidden"
-      style={{ minHeight: "100dvh" }}
+      style={{ minHeight: "100vh", minHeight: "100dvh" }}
     >
-      {/* Background — static on mobile, no scroll tracking */}
+      {/* Background */}
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1762541115443-d83816da748c?w=1600&q=80"
@@ -33,97 +32,64 @@ export default function Hero() {
         />
       </div>
 
-      {/* Content */}
+      {/* Content — CSS animations, no JS dependency */}
       <div className="relative z-10 flex flex-col items-center text-center px-6">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.6, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        >
+
+        {/* Logo — hidden on mobile */}
+        <div className="hero-scale-in mb-7 hidden md:block" style={{ animationDelay: "0s" }}>
           <Image
             src="/logo.png"
             alt="Oud Al Zahara logo"
             width={110}
             height={110}
-            className="rounded-full mb-7 gold-pulse"
+            className="rounded-full gold-pulse"
             style={{
               boxShadow: "0 0 48px rgba(232,201,109,0.55)",
               border: "2px solid rgba(232,201,109,0.4)",
             }}
           />
-        </motion.div>
-
-        {/* Eyebrow */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
-          className="text-xs tracking-widest uppercase mb-4"
-          style={{ color: "#c9a84c", fontFamily: "var(--font-inter)", letterSpacing: "0.38em" }}
-        >
-          Est. 2024 · Premium Oud House
-        </motion.p>
+        </div>
 
         {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 36 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-7xl font-bold mb-4 gold-pulse"
+        <h1
+          className="hero-fade-up text-5xl md:text-7xl font-bold mb-4 gold-pulse"
           style={{
             fontFamily: "var(--font-playfair)",
             color: "#e8c96d",
             letterSpacing: "0.08em",
             textShadow: "0 0 80px rgba(232,201,109,0.35)",
+            animationDelay: "0.35s",
           }}
         >
           Oud Al Zahara
-        </motion.h1>
+        </h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-          className="text-xl md:text-2xl mb-3 tracking-widest uppercase"
-          style={{ fontFamily: "var(--font-playfair)", color: "#c9a84c", letterSpacing: "0.22em" }}
-        >
-          The Essence of Arabia
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="text-sm tracking-widest uppercase"
+        {/* Tagline */}
+        <p
+          className="hero-fade-up text-xl md:text-2xl mb-3 tracking-widest uppercase"
           style={{
-            fontFamily: "var(--font-inter)",
-            color: "rgba(255,255,255,0.45)",
-            letterSpacing: "0.28em",
+            fontFamily: "var(--font-playfair)",
+            color: "#c9a84c",
+            letterSpacing: "0.22em",
+            animationDelay: "0.55s",
           }}
         >
-          Premium Oud Perfumes &amp; Attars
-        </motion.p>
+          The Essence of Arabia
+        </p>
 
         {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 1.25, ease: "easeOut" }}
-          className="mt-8 w-28 h-px"
+        <div
+          className="hero-expand-x mt-6 w-28 h-px"
           style={{
             background: "linear-gradient(to right, transparent, #e8c96d, transparent)",
-            transformOrigin: "center",
+            animationDelay: "0.75s",
           }}
         />
 
         {/* CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.45, ease: "easeOut" }}
-          className="flex flex-wrap justify-center gap-4 mt-8"
+        <div
+          className="hero-fade-up flex flex-wrap justify-center gap-4 mt-8"
+          style={{ animationDelay: "0.9s" }}
         >
           <button
             onClick={() => scrollTo("collection")}
@@ -164,26 +130,24 @@ export default function Hero() {
           >
             Our Story
           </button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll chevron */}
-      <motion.button
+      <button
         onClick={() => scrollTo("about")}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hero-fade-in hero-chevron"
         aria-label="Scroll down"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 0.6 }}
-        style={{ color: "#e8c96d", background: "none", border: "none", cursor: "pointer" }}
+        style={{
+          color: "#e8c96d",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          animationDelay: "1.8s",
+        }}
       >
-        <motion.div
-          animate={{ y: [0, 9, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown size={32} strokeWidth={1.5} />
-        </motion.div>
-      </motion.button>
+        <ChevronDown size={32} strokeWidth={1.5} />
+      </button>
     </section>
   );
 }
